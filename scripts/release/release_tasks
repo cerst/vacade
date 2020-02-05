@@ -1,3 +1,2 @@
-;publishSigned
-;doc/ghpagesPushSite
-;sonatypeRelease
+;+publishSigned
+;sonatypeBundleRelease
