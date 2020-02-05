@@ -15,5 +15,14 @@ object Dependencies {
 
   }
 
-  val coreLibraries: Seq[ModuleID] = Seq()
+  val `akka-http`: Seq[ModuleID] = Seq()
+
+  val avro4s: Seq[ModuleID] = Seq()
+
+  val `jsoniter-scala`: Seq[ModuleID] = Seq()
+
+  val pureconfig: Seq[ModuleID] = Seq()
+
+  val quill: Seq[ModuleID]= Seq()
+
 }
