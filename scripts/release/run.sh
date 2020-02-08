@@ -25,14 +25,14 @@ ${pre_release_tasks}
 
 
 # pipe sbt output to /dev/null as it otherwise interferes with the variable assignment using cat
-PROJECT_VERSION=$(cat ${project_root_abs_path}/target/version-to-file/version)
+project_version=$(cat ${project_root_abs_path}/target/version-to-file/version)
 echo ""
-echo "Do you want to publish v$PROJECT_VERSION (y/n)?"
+echo "Do you want to publish v$project_version (y/n)?"
 while true; do
     read yn
         case ${yn} in
             [Yy]* ) break;;
-            [Nn]* ) echo "Aborted" exit 0;;
+            [Nn]* ) echo "Aborted"; exit 0;;
             * ) echo "Please answer yes or no.";;
         esac
 done
@@ -42,8 +42,8 @@ echo "\
 ===========================
 Ensure Git branch is master
 ==========================="
-GIT_BRANCH=$(git symbolic-ref --short HEAD)
-if [[ ${GIT_BRANCH} -ne "master" ]]; then
+git_branch=$(git symbolic-ref --short HEAD)
+if [[ ${git_branch} != "master" ]]; then
     echo "You must be on Git branch 'master' to publish"
     exit 1
 else
