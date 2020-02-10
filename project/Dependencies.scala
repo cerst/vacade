@@ -1,5 +1,4 @@
 import sbt._
-import ModuleIDSyntax._
 
 object Dependencies {
 
@@ -9,7 +8,7 @@ object Dependencies {
     val Akka = "2.6.1"
     val AkkaHttp = "10.1.11"
     val Avro4s = "3.0.4"
-    val JsoniterScala = "2.0.4"
+    val JsoniterScala = "2.1.6"
     val Newtype = "0.4.3"
     val Paradise = "2.1.1"
     val ScalaCheck = "1.14.2"
@@ -30,6 +29,11 @@ object Dependencies {
     val AkkaStreamTeskit = "com.typesafe.akka" %% "akka-stream-testkit" % Version.Akka
     // Apache-2.0
     val Avro4sCore = "com.sksamuel.avro4s" %% "avro4s-core" % Version.Avro4s
+    // MIT
+    val JsoniterScalaCore = "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % Version.JsoniterScala
+    // MIT
+    // always only used for compilation
+    val JsoniterScalaMacros = "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % Version.JsoniterScala % Provided
     // Apache-2.0
     val Newtype = "io.estatico" %% "newtype" % Version.Newtype
     // Apache-2.0
@@ -51,7 +55,10 @@ object Dependencies {
     Library.Avro4sCore % Provided //
   )
 
-  val `jsoniter-scala`: Seq[ModuleID] = Seq()
+  val `jsoniter-scala`: Seq[ModuleID] = Seq(
+    Library.JsoniterScalaCore % Provided,
+    Library.JsoniterScalaMacros
+  )
 
   def `test`(scalaVersionValue: String): Seq[ModuleID] = {
     val cross = Seq(
@@ -60,6 +67,8 @@ object Dependencies {
       Library.AkkaStream % Test,
       Library.AkkaStreamTeskit % Test,
       Library.Avro4sCore,
+      Library.JsoniterScalaCore,
+      Library.JsoniterScalaMacros,
       Library.Newtype,
       Library.Scalatest % Test,
       Library.ScalatestPlusScalaCheck % Test
