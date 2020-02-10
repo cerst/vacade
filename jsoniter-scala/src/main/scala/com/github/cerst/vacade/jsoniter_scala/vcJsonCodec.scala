@@ -1,8 +1,9 @@
-package com.github.cerst.vacade.jsoniter_scala.internal
+package com.github.cerst.vacade.jsoniter_scala
 
 import java.time._
 import java.util.UUID
 
+import com.github.cerst.vacade.jsoniter_scala.internal.newJsonCodec
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonCodec
 
 object vcJsonCodec {
