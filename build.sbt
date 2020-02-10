@@ -39,7 +39,7 @@ lazy val `jsoniter-scala` = (project in file("jsoniter-scala"))
 //   (by declaring test type in src/main of this module and then having tests as usual)
 //   can't put tests into the original modules as this would cause a circular dependency
 lazy val `test` = (project in file("test"))
-  .dependsOn(`akka-http`)
+  .dependsOn(`akka-http`, avro4s)
   .settings(
     ReleaseSettings.disabled,
     crossScalaVersions := CommonValues.crossScalaVersions,

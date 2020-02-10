@@ -3,9 +3,9 @@ package com.github.cerst.vacade.test
 import java.util.UUID
 
 import akka.http.scaladsl.server.PathMatcher1
-
-import io.estatico.newtype.macros.newtype
 import com.github.cerst.vacade.akka.http._
+import com.github.cerst.vacade.avro4s._
+import io.estatico.newtype.macros.newtype
 import io.estatico.newtype.ops._
 
 object newtypeTypes {
@@ -68,6 +68,8 @@ object newtypeTypes {
   final class IntValueClass(val value: Int)
 
   object IntValueClass {
+    implicit val bicoderWithSchemaFor: BicoderWithSchemaFor[IntValueClass] = vcBicoderWithSchemaFor(apply)(_.value)
+
     val hexIntPm: PathMatcher1[IntValueClass] = vcPathMatcher.hexInt(apply)
 
     val intPm: PathMatcher1[IntValueClass] = vcPathMatcher.int(apply)

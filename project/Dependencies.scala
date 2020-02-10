@@ -59,6 +59,7 @@ object Dependencies {
       Library.AkkaHttpTestkit % Test,
       Library.AkkaStream % Test,
       Library.AkkaStreamTeskit % Test,
+      Library.Avro4sCore,
       Library.Newtype,
       Library.Scalatest % Test,
       Library.ScalatestPlusScalaCheck % Test
