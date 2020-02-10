@@ -15,7 +15,7 @@ object DefaultSettingsPlugin extends AutoPlugin {
       Seq(
         organization := "com.github.cerst",
         organizationName := CommonValues.organizationName,
-        resolvers ++= Dependencies.resolvers,
+        resolvers ++= Dependencies.additionalResolvers,
         scalaVersion := CommonValues.scalaVersion,
         startYear := Some(CommonValues.startYear)
       )

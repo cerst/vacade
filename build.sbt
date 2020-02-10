@@ -1,5 +1,5 @@
 lazy val root = (project in file("."))
-  .aggregate(`akka-http`, avro4s, `jsoniter-scala`, pureconfig, quill)
+  .aggregate(`akka-http`, avro4s, `jsoniter-scala`)
   .settings(
     // root intentionally does not contain any code, so don't publish
     ReleaseSettings.disabled,
@@ -13,7 +13,7 @@ lazy val `akka-http` = (project in file("akka-http"))
   .settings(
     ReleaseSettings.libraryOptimized("com.github.cerst.vacade.akka.http"),
     crossScalaVersions := CommonValues.crossScalaVersions,
-    libraryDependencies ++= Dependencies.`akka-http`,
+    libraryDependencies ++= Dependencies.`akka-http`(scalaVersion.value),
     name := "vacade-akka-http"
   )
 
@@ -33,19 +33,20 @@ lazy val `jsoniter-scala` = (project in file("jsoniter-scala"))
     name := "jsoniter-scala"
   )
 
-lazy val pureconfig: Project = (project in file("pureconfig"))
+// have a separate project for tests
+// * allows to declare test classes only once and
+// * works around the problem of not being able to use macro-code in the same compilation unit which declared them
+//   (by declaring test type in src/main of this module and then having tests as usual)
+//   can't put tests into the original modules as this would cause a circular dependency
+lazy val `test` = (project in file("test"))
+  .dependsOn(`akka-http`)
   .settings(
-    ReleaseSettings.libraryOptimized("com.github.cerst.vacade.pureconfig"),
+    ReleaseSettings.disabled,
     crossScalaVersions := CommonValues.crossScalaVersions,
-    libraryDependencies ++= Dependencies.pureconfig,
-    name := "vacade-pureconfig"
-  )
-
-
-lazy val quill = (project in file("quill"))
-  .settings(
-    ReleaseSettings.libraryOptimized("com.github.cerst.vacade.quill"),
-    crossScalaVersions := CommonValues.crossScalaVersions,
-    libraryDependencies ++= Dependencies.quill,
-    name := "vacade-quill"
+    libraryDependencies ++= Dependencies.`test`(scalaVersion.value),
+    name := "test",
+    scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, 13)) => Seq("-Ymacro-annotations")
+      case _             => Seq()
+    })
   )
