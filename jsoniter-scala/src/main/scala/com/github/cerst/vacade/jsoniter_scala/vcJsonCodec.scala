@@ -1,3 +1,9 @@
+/*
+ * Copyright 2020 Constantin Gerstberger
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 package com.github.cerst.vacade.jsoniter_scala
 
 import java.time._

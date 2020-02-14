@@ -1,3 +1,9 @@
+/*
+ * Copyright 2020 Constantin Gerstberger
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 package com.github.cerst.vacade.test
 
 import java.time.{Duration, LocalDateTime, OffsetDateTime, ZonedDateTime}
