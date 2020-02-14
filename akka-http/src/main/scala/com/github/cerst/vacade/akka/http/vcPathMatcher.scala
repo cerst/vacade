@@ -14,7 +14,6 @@ import scala.util.control.NonFatal
   *   <li>vcPathMatcherHexInt & vcPathMatcherInt (as well as other similar pairs) have the same signature</li>
   * </ul>
   */
-// TODO: support Either via separate object or methods?
 object vcPathMatcher {
 
   final def double[VC](construct: Double => VC): PathMatcher1[VC] = safeMap(DoubleNumber, construct)
