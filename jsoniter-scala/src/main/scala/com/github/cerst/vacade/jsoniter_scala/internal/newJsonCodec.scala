@@ -11,7 +11,6 @@ object newJsonCodec {
   final def apply[U, VC](uName: String,
                          construct: U => VC,
                          destruct: VC => U,
-                         vcNullValue: VC,
                          readU: JsonReader => U,
                          writeVal: JsonWriter => U => Unit,
                          readKeyAsU: JsonReader => U,
@@ -42,7 +41,7 @@ object newJsonCodec {
         }
       }
 
-      override def nullValue: VC = vcNullValue
+      override def nullValue: VC = null.asInstanceOf[VC]
 
       override def decodeKey(in: JsonReader): VC = {
         val u = readKeyAsU(in)

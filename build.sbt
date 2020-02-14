@@ -1,12 +1,12 @@
 lazy val root = (project in file("."))
-  .aggregate(`akka-http`, avro4s, `jsoniter-scala`)
+  .aggregate(`akka-http`, avro4s, `jsoniter-scala`, `test`)
   .settings(
     // root intentionally does not contain any code, so don't publish
     ReleaseSettings.disabled,
     // crossScalaVersions must be set to Nil on the aggregating project
     // https: //www.scala-sbt.org/1.x/docs/Cross-Build.html#Cross+building+a+project
     crossScalaVersions := Nil,
-    name := "Value Class Derivations-root"
+    name := "vacade-root"
   )
 
 lazy val `akka-http` = (project in file("akka-http"))
@@ -39,7 +39,7 @@ lazy val `jsoniter-scala` = (project in file("jsoniter-scala"))
 //   (by declaring test type in src/main of this module and then having tests as usual)
 //   can't put tests into the original modules as this would cause a circular dependency
 lazy val `test` = (project in file("test"))
-  .dependsOn(`akka-http`, avro4s)
+  .dependsOn(`akka-http`, avro4s, `jsoniter-scala`)
   .settings(
     ReleaseSettings.disabled,
     crossScalaVersions := CommonValues.crossScalaVersions,

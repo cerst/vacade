@@ -55,10 +55,7 @@ object Dependencies {
     Library.Avro4sCore % Provided //
   )
 
-  val `jsoniter-scala`: Seq[ModuleID] = Seq(
-    Library.JsoniterScalaCore % Provided,
-    Library.JsoniterScalaMacros
-  )
+  val `jsoniter-scala`: Seq[ModuleID] = Seq(Library.JsoniterScalaCore % Provided)
 
   def `test`(scalaVersionValue: String): Seq[ModuleID] = {
     val cross = Seq(
