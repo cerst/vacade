@@ -13,7 +13,7 @@ import com.github.cerst.vacade.jsoniter_scala.internal.newJsonCodec
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonCodec
 
 /**
-  * Type-suffix'd methods are required because jsoniter-scala does not allow to summon JsonCodec's.
+  * Explicit specification of the underlying type is required because jsoniter-scala does not allow to summon JsonCodec's.
   */
 object vcJsonCodec {
 
