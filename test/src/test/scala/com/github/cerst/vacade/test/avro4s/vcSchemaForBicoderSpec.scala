@@ -33,7 +33,7 @@ final class vcSchemaForBicoderSpec extends AnyFreeSpec with Assertions {
 
       assert(plainBytes sameElements anyvalBytes)
 
-      val parsedAnyvalRecord = deserialize(anyvalBytes, anyval.Record.schema)
+      val parsedAnyvalRecord = deserialize[anyval.Record](anyvalBytes, anyval.Record.schema)
 
       assert(parsedAnyvalRecord == anyvalRecord)
     }
@@ -55,7 +55,7 @@ final class vcSchemaForBicoderSpec extends AnyFreeSpec with Assertions {
 
       assert(plainBytes sameElements newtypeBytes)
 
-      val parsedNewtypeRecord = deserialize(newtypeBytes, anyval.Record.schema)
+      val parsedNewtypeRecord = deserialize[newtype.Record](newtypeBytes, anyval.Record.schema)
 
       assert(parsedNewtypeRecord == newtypeRecord)
     }
