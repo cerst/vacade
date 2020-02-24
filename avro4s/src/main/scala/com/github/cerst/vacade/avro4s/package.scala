@@ -20,11 +20,11 @@ package object avro4s {
     */
   final def vcSchemaForBicoder[U: SchemaFor: Decoder: Encoder, VC](
     construct: U => VC
-  )(destruct: VC => U, overrideSchemaU: Option[Schema] = None): SchemaForBicoder[VC] = {
+  )(destruct: VC => U, overrideSchemaU: Option[FieldMapper => Schema] = None): SchemaForBicoder[VC] = {
 
     new SchemaForBicoder[VC] {
       override def schema(fieldMapper: FieldMapper): Schema = {
-        overrideSchemaU.getOrElse(SchemaFor[U].schema(fieldMapper))
+        overrideSchemaU.getOrElse(SchemaFor[U].schema _)(fieldMapper)
       }
 
       override def encode(vc: VC, schema: Schema, fieldMapper: FieldMapper): AnyRef = {
