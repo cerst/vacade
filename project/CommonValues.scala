@@ -11,6 +11,6 @@ object CommonValues {
   val scalaVersion = "2.13.1"
   val startYear = 2020
 
-  val crossScalaVersions = List(scalaVersion, "2.12.10")
+  val crossScalaVersions = List(scalaVersion, "2.12.11")
 
 }
