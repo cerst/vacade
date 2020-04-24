@@ -69,7 +69,7 @@ object newtypeTypes {
   final class DoubleValueClass(val value: Double)
 
   object DoubleValueClass {
-    implicit val jsonCodecForDoubleValueClass: JsonCodec[DoubleValueClass] = vcJsonCodec.double(apply)( _.value)
+    implicit val jsonCodecForDoubleValueClass: JsonCodec[DoubleValueClass] = vcJsonCodec.double(apply)(_.value)
 
     val pm: PathMatcher1[DoubleValueClass] = vcPathMatcher.double(apply)
 
@@ -86,7 +86,8 @@ object newtypeTypes {
   final class DurationValueClass private (val value: Duration)
 
   object DurationValueClass {
-    implicit val jsonCodecForDurationValueClass: JsonCodec[DurationValueClass] = vcJsonCodec.duration[DurationValueClass](apply, _.value)()
+    implicit val jsonCodecForDurationValueClass: JsonCodec[DurationValueClass] =
+      vcJsonCodec.duration[DurationValueClass](apply)(_.value)
 
     def apply(value: Duration): DurationValueClass = {
       value.coerce

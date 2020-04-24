@@ -12,6 +12,8 @@ import java.util.UUID
 import akka.http.scaladsl.server.PathMatcher1
 import com.github.cerst.vacade.akka.http._
 import com.github.cerst.vacade.avro4s._
+import com.github.cerst.vacade.jsoniter_scala._
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonCodec
 
 // ================================================================================================================
 // BIG DECIMAL
@@ -19,6 +21,8 @@ import com.github.cerst.vacade.avro4s._
 final case class BigDecimalValueClass private (value: BigDecimal) extends AnyVal
 
 object BigDecimalValueClass {
+  implicit val jsonCodecForBigDecimalValueClass: JsonCodec[BigDecimalValueClass] =
+    vcJsonCodec.bigDecimal(apply)(_.value, null.asInstanceOf[BigDecimalValueClass])
 }
 
 // ================================================================================================================
@@ -27,6 +31,8 @@ object BigDecimalValueClass {
 final case class BigIntValueClass private (value: BigInt) extends AnyVal
 
 object BigIntValueClass {
+  implicit val jsonCodecForBigIntValueClass: JsonCodec[BigIntValueClass] =
+    vcJsonCodec.bigInt(apply)(_.value, null.asInstanceOf[BigIntValueClass])
 }
 
 // ================================================================================================================
@@ -35,6 +41,8 @@ object BigIntValueClass {
 final case class BooleanValueClass private (value: Boolean) extends AnyVal
 
 object BooleanValueClass {
+  implicit val jsonCodecForBooleanValuesClass: JsonCodec[BooleanValueClass] =
+    vcJsonCodec.boolean(apply)(_.value, null.asInstanceOf[BooleanValueClass])
 }
 
 // ================================================================================================================
@@ -43,6 +51,9 @@ object BooleanValueClass {
 final case class DoubleValueClass private (value: Double) extends AnyVal
 
 object DoubleValueClass {
+  implicit val jsonCodecForDoubleValueClass: JsonCodec[DoubleValueClass] =
+    vcJsonCodec.double(apply)(_.value, null.asInstanceOf[DoubleValueClass])
+
   val pm: PathMatcher1[DoubleValueClass] = vcPathMatcher.double(apply)
 
   def apply(value: Double): DoubleValueClass = {
@@ -57,6 +68,9 @@ object DoubleValueClass {
 final case class DurationValueClass private (val value: Duration) extends AnyVal
 
 object DurationValueClass {
+  implicit val jsonCodecForDurationValueClass: JsonCodec[DurationValueClass] =
+    vcJsonCodec.duration(apply)(_.value, null.asInstanceOf[DurationValueClass])
+
   def apply(value: Duration): DurationValueClass = {
     new DurationValueClass(value)
   }
@@ -68,6 +82,9 @@ object DurationValueClass {
 final case class FloatValueClass private (value: Float) extends AnyVal
 
 object FloatValueClass {
+  implicit val jsonCodecForFloatValueClass: JsonCodec[FloatValueClass] =
+    vcJsonCodec.float(apply)(_.value, null.asInstanceOf[FloatValueClass])
+
   def apply(value: Float): FloatValueClass = {
     require(value > 0)
     new FloatValueClass(value)
@@ -80,6 +97,9 @@ object FloatValueClass {
 final case class IntValueClass private (value: Int) extends AnyVal
 
 object IntValueClass {
+  implicit val jsonCodecForIntValueClass: JsonCodec[IntValueClass] =
+    vcJsonCodec.int(apply)(_.value, null.asInstanceOf[IntValueClass])
+
   implicit val schemaForBicoderForIntValueClass: SchemaForBicoder[IntValueClass] = vcSchemaForBicoder(apply)(_.value)
 
   val hexIntPm: PathMatcher1[IntValueClass] = vcPathMatcher.hexInt(apply)
@@ -98,6 +118,9 @@ object IntValueClass {
 final case class LocalDateTimeValueClass private (value: LocalDateTime) extends AnyVal
 
 object LocalDateTimeValueClass {
+  implicit val jsonCodecForLocalDateTimeValueClass: JsonCodec[LocalDateTimeValueClass] =
+    vcJsonCodec.localDateTime(apply)(_.value, null.asInstanceOf[LocalDateTimeValueClass])
+
   def apply(value: LocalDateTime): LocalDateTimeValueClass = {
     new LocalDateTimeValueClass(value)
   }
@@ -109,6 +132,9 @@ object LocalDateTimeValueClass {
 final case class LongValueClass private (value: Long) extends AnyVal
 
 object LongValueClass {
+  implicit val jsonCodecForLongValueClass: JsonCodec[LongValueClass] =
+    vcJsonCodec.long(apply)(_.value, null.asInstanceOf[LongValueClass])
+
   val hexLongPm: PathMatcher1[LongValueClass] = vcPathMatcher.hexLong(apply)
 
   val longPm: PathMatcher1[LongValueClass] = vcPathMatcher.long(apply)
@@ -125,6 +151,9 @@ object LongValueClass {
 final case class OffsetDateTimeValueClass(value: OffsetDateTime) extends AnyVal
 
 object OffsetDateTimeValueClass {
+  implicit val jsonCodecForOffsetDateTimeValueClass: JsonCodec[OffsetDateTimeValueClass] =
+    vcJsonCodec.offsetDateTime(apply)(_.value, null.asInstanceOf[OffsetDateTimeValueClass])
+
   def apply(value: OffsetDateTime): OffsetDateTimeValueClass = {
     new OffsetDateTimeValueClass(value)
   }
@@ -136,6 +165,9 @@ object OffsetDateTimeValueClass {
 final case class ShortValueClass(value: Short) extends AnyVal
 
 object ShortValueClass {
+  implicit val jsonCodecForShortValueClass: JsonCodec[ShortValueClass] =
+    vcJsonCodec.short(apply)(_.value, null.asInstanceOf[ShortValueClass])
+
   def apply(value: Short): ShortValueClass = {
     new ShortValueClass(value)
   }
@@ -147,6 +179,9 @@ object ShortValueClass {
 final case class StringValueClass private (value: String) extends AnyVal
 
 object StringValueClass {
+  implicit val jsonCodecForStringValueClass: JsonCodec[StringValueClass] =
+    vcJsonCodec.string(apply)(_.value, null.asInstanceOf[StringValueClass])
+
   val pm: PathMatcher1[StringValueClass] = vcPathMatcher.string(apply)
 
   def apply(value: String): StringValueClass = {
@@ -161,6 +196,9 @@ object StringValueClass {
 final case class UuidValueClass private (value: UUID) extends AnyVal
 
 object UuidValueClass {
+  implicit val jsonCodecForUuidValueClass: JsonCodec[UuidValueClass] =
+    vcJsonCodec.uuid(apply)(_.value, null.asInstanceOf[UuidValueClass])
+
   val pm: PathMatcher1[UuidValueClass] = vcPathMatcher.uuid(apply)
 }
 
@@ -170,6 +208,9 @@ object UuidValueClass {
 final case class ZonedDateTimeValueClass(value: ZonedDateTime)
 
 object ZonedDateTimeValueClass {
+  implicit val jsonCodecForZonedDateTimeValueClass: JsonCodec[ZonedDateTimeValueClass] =
+    vcJsonCodec.zonedDateTime(apply)(_.value, null.asInstanceOf[ZonedDateTimeValueClass])
+
   def apply(value: ZonedDateTime): ZonedDateTimeValueClass = {
     new ZonedDateTimeValueClass(value)
   }

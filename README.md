@@ -1,7 +1,8 @@
 # Value Class Derivations
 
 Value-class-derivations (vacade) is to reduce boilerplate needed to work with value classes and 
-different libraries.
+different libraries.  
+It supports Scala 2.12 & 2.13.
 
 ## Usage
 
@@ -32,7 +33,10 @@ object types {
 
   object ItemId {
 
-    implicit val jsonCodecForItemId: JsonCodec[ItemId] = vcJsonCodec.int(apply)(_.asInt)
+    // null.asInstanceOf is only required for AnyVal value classes due to https://github.com/scala/bug/issues/8097
+    // otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed
+    // leave it out for Newtype
+    implicit val jsonCodecForItemId: JsonCodec[ItemId] = vcJsonCodec.int(apply)(_.asInt, null.asInstanceOf[ItemId])
 
     implicit val schemaForBicoderForItemId: SchemaForBicoder[ItemId] = vcSchemaForBicoder(apply)(_.asInt)
 
@@ -57,11 +61,6 @@ object types {
 * All libraries are configured as _Provided_
 * All derivations methods are prefixed with `vc` followed by the name of the target type (e.g. `vcJsonCodec`)
   * Whenever explicit specification of underlying types is required, the aforementioned methods become objects
-    having said types as method names (e.g. `vcJsonCodec.int`.  
+    having said types as method names (e.g. `vcJsonCodec.int`).  
     These objects also document why they are necessary.
-
-## Limitations
-Implementations are tested against `AnyVal` and `newtype`.  
-
-Due to a [compiler bug](https://github.com/scala/bug/issues/8097), `jsoniter_scala` derivations don't
-work with `AnyVal` (the code compiles but throws a `NullPointerException` at runtime). 
+* Implementations should work for as consistently as possible for `AnyVal` and `newtype`.

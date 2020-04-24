@@ -20,7 +20,13 @@ object vcJsonCodec {
   // ===================================================================================================================
   // BigDecimal
   // ===================================================================================================================
-  def bigDecimal[VC](construct: BigDecimal => VC)(destruct: VC => BigDecimal): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def bigDecimal[VC](construct: BigDecimal => VC)(destruct: VC => BigDecimal,
+                                                  nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[BigDecimal, VC](
       "BigDecimal",
       construct,
@@ -28,14 +34,21 @@ object vcJsonCodec {
       readU = _.readBigDecimal(default = null),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsBigDecimal(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // BigInt
   // ===================================================================================================================
-  final def bigInt[VC](construct: BigInt => VC)(destruct: VC => BigInt): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  final def bigInt[VC](construct: BigInt => VC)(destruct: VC => BigInt,
+                                                nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[BigInt, VC](
       "BigInt",
       construct,
@@ -43,14 +56,21 @@ object vcJsonCodec {
       readU = _.readBigInt(default = null),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsBigInt(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // BOOLEAN
   // ===================================================================================================================
-  def boolean[VC](construct: Boolean => VC)(destruct: VC => Boolean): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def boolean[VC](construct: Boolean => VC)(destruct: VC => Boolean,
+                                            nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[Boolean, VC](
       "Boolean",
       construct,
@@ -58,14 +78,20 @@ object vcJsonCodec {
       readU = _.readBoolean,
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsBoolean(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // BYTE
   // ===================================================================================================================
-  def byte[VC](construct: Byte => VC)(destruct: VC => Byte): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def byte[VC](construct: Byte => VC)(destruct: VC => Byte, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[Byte, VC](
       "Byte",
       construct,
@@ -73,14 +99,20 @@ object vcJsonCodec {
       readU = _.readByte(),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsByte(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // DOUBLE
   // ===================================================================================================================
-  def double[VC](construct: Double => VC)(destruct: VC => Double): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def double[VC](construct: Double => VC)(destruct: VC => Double, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[Double, VC](
       "Double",
       construct,
@@ -88,28 +120,21 @@ object vcJsonCodec {
       readU = _.readDouble(),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsDouble(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // DURATION
   // ===================================================================================================================
-  final case class _duration[VC](construct: Duration => VC) {
-    def apply(destruct: VC => Duration): JsonCodec[VC] = {
-      newJsonCodec[Duration, VC](
-        "Duration",
-        construct,
-        destruct,
-        readU = _.readDuration(default = null),
-        writeVal = _.writeVal,
-        readKeyAsU = _.readKeyAsDuration(),
-        writeKey = _.writeKey
-      )
-    }
-  }
-
-  def duration[VC](construct: Duration => VC, destruct: VC => Duration)(): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def duration[VC](construct: Duration => VC)(destruct: VC => Duration,
+                                              nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[Duration, VC](
       "Duration",
       construct,
@@ -117,14 +142,20 @@ object vcJsonCodec {
       readU = _.readDuration(default = null),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsDuration(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // FLOAT
   // ===================================================================================================================
-  def float[VC](construct: Float => VC)(destruct: VC => Float): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def float[VC](construct: Float => VC)(destruct: VC => Float, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[Float, VC](
       "Float",
       construct,
@@ -132,14 +163,21 @@ object vcJsonCodec {
       readU = _.readFloat(),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsFloat(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // INSTANT
   // ===================================================================================================================
-  def instant[VC](construct: Instant => VC)(destruct: VC => Instant): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def instant[VC](construct: Instant => VC)(destruct: VC => Instant,
+                                            nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[Instant, VC](
       "Instant",
       construct,
@@ -147,14 +185,20 @@ object vcJsonCodec {
       readU = _.readInstant(default = null),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsInstant(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // INT
   // ===================================================================================================================
-  def int[VC](construct: Int => VC)(destruct: VC => Int): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def int[VC](construct: Int => VC)(destruct: VC => Int, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[Int, VC](
       "Int",
       construct,
@@ -162,14 +206,21 @@ object vcJsonCodec {
       readU = _.readInt(),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsInt(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // LOCAL DATE TIME
   // ===================================================================================================================
-  def localDateTime[VC](construct: LocalDateTime => VC)(destruct: VC => LocalDateTime): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def localDateTime[VC](construct: LocalDateTime => VC)(destruct: VC => LocalDateTime,
+                                                        nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[LocalDateTime, VC](
       "LocalDateTime",
       construct,
@@ -177,14 +228,20 @@ object vcJsonCodec {
       readU = _.readLocalDateTime(default = null),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsLocalDateTime(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // LONG
   // ===================================================================================================================
-  def long[VC](construct: Long => VC)(destruct: VC => Long): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def long[VC](construct: Long => VC)(destruct: VC => Long, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[Long, VC](
       "Long",
       construct,
@@ -192,14 +249,21 @@ object vcJsonCodec {
       readU = _.readLong(),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsLong(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // OFFSET DATE TIME
   // ===================================================================================================================
-  def offsetDateTime[VC](construct: OffsetDateTime => VC)(destruct: VC => OffsetDateTime): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def offsetDateTime[VC](construct: OffsetDateTime => VC)(destruct: VC => OffsetDateTime,
+                                                          nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[OffsetDateTime, VC](
       "OffsetDateTime",
       construct,
@@ -207,14 +271,20 @@ object vcJsonCodec {
       readU = _.readOffsetDateTime(default = null),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsOffsetDateTime(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // SHORT
   // ===================================================================================================================
-  def short[VC](construct: Short => VC)(destruct: VC => Short): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def short[VC](construct: Short => VC)(destruct: VC => Short, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[Short, VC](
       "Short",
       construct,
@@ -222,14 +292,20 @@ object vcJsonCodec {
       readU = _.readShort(),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsShort(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // STRING
   // ===================================================================================================================
-  def string[VC](construct: String => VC)(destruct: VC => String): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def string[VC](construct: String => VC)(destruct: VC => String, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[String, VC](
       "String",
       construct,
@@ -237,14 +313,20 @@ object vcJsonCodec {
       readU = _.readString(default = null),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsString(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
   // ===================================================================================================================
   // UUID
   // ===================================================================================================================
-  def uuid[VC](construct: UUID => VC)(destruct: VC => UUID): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def uuid[VC](construct: UUID => VC)(destruct: VC => UUID, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[UUID, VC](
       "UUID",
       construct,
@@ -252,7 +334,8 @@ object vcJsonCodec {
       readU = _.readUUID(default = null),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsUUID(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
 
   }
@@ -260,7 +343,13 @@ object vcJsonCodec {
   // ===================================================================================================================
   // ZONED DATE TIME
   // ===================================================================================================================
-  def zonedDateTime[VC](construct: ZonedDateTime => VC)(destruct: VC => ZonedDateTime): JsonCodec[VC] = {
+  /**
+    * @param nullVc Provide explicitly when using with AnyVal.<br/>
+    *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
+    *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
+    */
+  def zonedDateTime[VC](construct: ZonedDateTime => VC)(destruct: VC => ZonedDateTime,
+                                                        nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[ZonedDateTime, VC](
       "ZonedDateTime",
       construct,
@@ -268,7 +357,8 @@ object vcJsonCodec {
       readU = _.readZonedDateTime(default = null),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsZonedDateTime(),
-      writeKey = _.writeKey
+      writeKey = _.writeKey,
+      nullVc
     )
   }
 
