@@ -6,10 +6,10 @@ object Dependencies {
 
   // TODO: check for updates (plugins including) - do not upgrade beyond akka-http-json
   private object Version {
-    val Akka = "2.6.4"
+    val Akka = "2.5.31"
     val AkkaHttp = "10.1.11"
     val Avro4s = "3.0.9"
-    val JsoniterScala = "2.1.7"
+    val JsoniterScala = "2.1.15"
     val Newtype = "0.4.3"
     val Paradise = "2.1.1"
     val ScalaCheck = "1.14.2"
@@ -48,7 +48,7 @@ object Dependencies {
     val Paradise = compilerPlugin("org.scalamacros" % "paradise" % Version.Paradise cross CrossVersion.full)
   }
 
-  def `akka-http`(scalaVersionValue: String): Seq[ModuleID] = Seq(
+  val `akka-http`: Seq[ModuleID] = Seq(
     Library.AkkaHttp % Provided //
   )
 
@@ -56,7 +56,9 @@ object Dependencies {
     Library.Avro4sCore % Provided //
   )
 
-  val `jsoniter-scala`: Seq[ModuleID] = Seq(Library.JsoniterScalaCore % Provided)
+  val `jsoniter-scala`: Seq[ModuleID] = Seq(
+    Library.JsoniterScalaCore % Provided //
+  )
 
   def `test`(scalaVersionValue: String): Seq[ModuleID] = {
     val cross = Seq(

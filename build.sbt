@@ -13,7 +13,7 @@ lazy val `akka-http` = (project in file("akka-http"))
   .settings(
     ReleaseSettings.libraryOptimized("com.github.cerst.vacade.akka.http"),
     crossScalaVersions := CommonValues.crossScalaVersions,
-    libraryDependencies ++= Dependencies.`akka-http`(scalaVersion.value),
+    libraryDependencies ++= Dependencies.`akka-http`,
     name := "vacade-akka-http"
   )
 

@@ -5,10 +5,10 @@ import sbt._
   */
 object CommonValues {
 
-  val connection = "git@github.com:cerst/Value Class Derivations.git"
-  val homepage = url("https://github.com/cerst/Value Class Derivations")
+  val connection = "git@github.com:cerst/vacade.git"
+  val homepage = url("https://github.com/cerst/vacade")
   val organizationName = "Constantin Gerstberger"
-  val scalaVersion = "2.13.1"
+  val scalaVersion = "2.13.2"
   val startYear = 2020
 
   val crossScalaVersions = List(scalaVersion, "2.12.11")
