@@ -7,14 +7,13 @@ object Dependencies {
   // TODO: check for updates (plugins including) - do not upgrade beyond akka-http-json
   private object Version {
     val Akka = "2.5.31"
-    val AkkaHttp = "10.1.11"
-    val Avro4s = "3.0.9"
-    val JsoniterScala = "2.1.15"
-    val Newtype = "0.4.3"
+    val AkkaHttp = "10.1.12"
+    val Avro4s = "3.1.0"
+    val JsoniterScala = "2.2.4"
+    val Newtype = "0.4.4"
     val Paradise = "2.1.1"
-    val ScalaCheck = "1.14.2"
-    val Scalatest = "3.1.1"
-    val ScalatestPlusScalaCheck = "3.1.1.1"
+    val Scalatest = "3.1.2"
+    val ScalatestPlusScalaCheck = "3.1.2.0"
   }
 
   // comment licenses for dependencies using the SPDX short identifier (see e.g. https://opensource.org/licenses/Apache-2.0)
