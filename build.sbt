@@ -30,7 +30,7 @@ lazy val `jsoniter-scala` = (project in file("jsoniter-scala"))
     ReleaseSettings.libraryOptimized("com.github.cerst.vacade.jsoniter_scala"),
     crossScalaVersions := CommonValues.crossScalaVersions,
     libraryDependencies ++= Dependencies.`jsoniter-scala`,
-    name := "jsoniter-scala"
+    name := "vacade-jsoniter-scala"
   )
 
 // have a separate project for tests
