@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.2
+* fix artifact id _jsoniter-scala_ -> _vacade-jsoniter-scala_
+
 ## 0.1.1
 * dependency updates
 
