@@ -8,7 +8,7 @@ object Dependencies {
     val Akka = "2.6.6"
     val AkkaHttp = "10.1.12"
     val Avro4s = "3.1.0"
-    val JsoniterScala = "2.2.6"
+    val JsoniterScala = "2.4.3"
     val Newtype = "0.4.4"
     val Paradise = "2.1.1"
     val Scalatest = "3.2.0"
