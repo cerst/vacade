@@ -24,7 +24,7 @@ addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.0")
 
 // https://github.com/xerial/sbt-sonatype
 // publish artifacts to Sonatype
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.2")
+addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.3")
 
 // https://github.com/rtimush/sbt-updates
 // check for new releases of plugins and dependencies
