@@ -1,3 +1,8 @@
+[![GitHub license](https://img.shields.io/github/license/cerst/vacade)](https://github.com/cerst/vacade/blob/master/LICENSE)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.cerst/vacade-jsoniter-scala_2.13)](https://search.maven.org/search?q=g:com.github.cerst%20a:vacade-*)
+
+
+
 # Value Class Derivations
 
 Value-class-derivations (vacade) is to reduce boilerplate needed to work with value classes and 
@@ -63,4 +68,4 @@ object types {
   * Whenever explicit specification of underlying types is required, the aforementioned methods become objects
     having said types as method names (e.g. `vcJsonCodec.int`).  
     These objects also document why they are necessary.
-* Implementations should work for as consistently as possible for `AnyVal` and `newtype`.
+* Implementations should work as consistently as possible for `AnyVal` and `newtype`.
