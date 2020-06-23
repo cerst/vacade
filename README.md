@@ -1,5 +1,5 @@
 [![GitHub license](https://img.shields.io/github/license/cerst/vacade)](https://github.com/cerst/vacade/blob/master/LICENSE)
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.cerst/vacade-jsoniter-scala_2.13)](https://search.maven.org/search?q=g:com.github.cerst%20a:vacade-*)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.cerst/vacade-jsoniter-scala_2.13)](https://search.maven.org/search?q=g:com.github.cerst%20AND%20a:vacade-*)
 
 
 
