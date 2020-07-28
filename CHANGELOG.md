@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+* update the build
+* update _jsoniter-scala_ to 2.4.4
+
 ## 0.2.0
 * upgrade _jsoniter-scala_ to 2.4.3
 

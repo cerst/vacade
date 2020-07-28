@@ -75,7 +75,7 @@ object vcJsonCodec {
       "Boolean",
       construct,
       destruct,
-      readU = _.readBoolean,
+      readU = _.readBoolean(),
       writeVal = _.writeVal,
       readKeyAsU = _.readKeyAsBoolean(),
       writeKey = _.writeKey,

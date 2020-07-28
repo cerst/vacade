@@ -6,7 +6,7 @@ addSbtPlugin("io.get-coursier" % "sbt-coursier" % "1.0.3")
 
 // https://github.com/dwijnand/sbt-dynver
 // derive and set project versions based on Git meta data
-addSbtPlugin("com.dwijnand" % "sbt-dynver" % "4.0.0")
+addSbtPlugin("com.dwijnand" % "sbt-dynver" % "4.1.1")
 
 // https://github.com/sbt/sbt-header
 // generate and update source code license headers
@@ -24,7 +24,11 @@ addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.0")
 
 // https://github.com/xerial/sbt-sonatype
 // publish artifacts to Sonatype
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.3")
+addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.4")
+
+// https://github.com/DavidGregory084/sbt-tpolecat
+// automatically sets valuable compiler flags
+addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.13")
 
 // https://github.com/rtimush/sbt-updates
 // check for new releases of plugins and dependencies
