@@ -6,13 +6,14 @@ object Dependencies {
 
   private object Version {
     val Akka = "2.6.8"
-    val AkkaHttp = "10.1.12"
+    val AkkaHttp = "10.2.0"
+    // 3.1.1 is an accidental, broken release - so, don't update
     val Avro4s = "3.1.0"
-    val JsoniterScala = "2.4.4"
+    val JsoniterScala = "2.6.0"
     val Newtype = "0.4.4"
     val Paradise = "2.1.1"
-    val Scalatest = "3.2.0"
-    val ScalatestPlusScalaCheck = "3.2.0.0"
+    val Scalatest = "3.2.1"
+    val ScalatestPlusScalaCheck = "3.2.1.0"
   }
 
   // comment licenses for dependencies using the SPDX short identifier (see e.g. https://opensource.org/licenses/Apache-2.0)

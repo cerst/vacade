@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0
+* update _jsoniter-scala_ to 2.6.0
+* update _akka-http_ to 10.2.0
+
+
 ## 0.2.1
 * update the build
 * update _jsoniter-scala_ to 2.4.4

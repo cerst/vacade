@@ -20,7 +20,7 @@ addSbtPlugin("com.jsuereth" % "sbt-pgp" % "2.0.1")
 
 // https://scalameta.org/scalafmt/
 // thorough code formatting (recommendation: use Intellij plugin configured as format-on-save)
-addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.0")
+addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.2")
 
 // https://github.com/xerial/sbt-sonatype
 // publish artifacts to Sonatype
