@@ -1,9 +1,3 @@
-// http://get-coursier.io/
-// fast(er) dependency resolution and fetching
-// useful commands:
-//    coursierDependencyTree - render a dependency tree including eviction information (printed yellow)
-addSbtPlugin("io.get-coursier" % "sbt-coursier" % "1.0.3")
-
 // https://github.com/dwijnand/sbt-dynver
 // derive and set project versions based on Git meta data
 addSbtPlugin("com.dwijnand" % "sbt-dynver" % "4.1.1")
@@ -16,7 +10,7 @@ addSbtPlugin("de.heikoseeberger" % "sbt-header" % "5.6.0")
 
 // https://github.com/sbt/sbt-pgp
 // pgp-sign releases
-addSbtPlugin("com.jsuereth" % "sbt-pgp" % "2.0.1")
+addSbtPlugin("com.jsuereth" % "sbt-pgp" % "2.1.1")
 
 // https://scalameta.org/scalafmt/
 // thorough code formatting (recommendation: use Intellij plugin configured as format-on-save)
@@ -24,11 +18,11 @@ addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.2")
 
 // https://github.com/xerial/sbt-sonatype
 // publish artifacts to Sonatype
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.4")
+addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.5")
 
 // https://github.com/DavidGregory084/sbt-tpolecat
 // automatically sets valuable compiler flags
-addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.13")
+addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.16")
 
 // https://github.com/rtimush/sbt-updates
 // check for new releases of plugins and dependencies

@@ -25,8 +25,9 @@ object vcJsonCodec {
     *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
     *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
     */
-  def bigDecimal[VC](construct: BigDecimal => VC)(destruct: VC => BigDecimal,
-                                                  nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
+  def bigDecimal[VC](
+    construct: BigDecimal => VC
+  )(destruct: VC => BigDecimal, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[BigDecimal, VC](
       "BigDecimal",
       construct,
@@ -47,8 +48,9 @@ object vcJsonCodec {
     *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
     *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
     */
-  final def bigInt[VC](construct: BigInt => VC)(destruct: VC => BigInt,
-                                                nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
+  final def bigInt[VC](
+    construct: BigInt => VC
+  )(destruct: VC => BigInt, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[BigInt, VC](
       "BigInt",
       construct,
@@ -69,8 +71,9 @@ object vcJsonCodec {
     *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
     *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
     */
-  def boolean[VC](construct: Boolean => VC)(destruct: VC => Boolean,
-                                            nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
+  def boolean[VC](
+    construct: Boolean => VC
+  )(destruct: VC => Boolean, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[Boolean, VC](
       "Boolean",
       construct,
@@ -133,8 +136,9 @@ object vcJsonCodec {
     *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
     *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
     */
-  def duration[VC](construct: Duration => VC)(destruct: VC => Duration,
-                                              nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
+  def duration[VC](
+    construct: Duration => VC
+  )(destruct: VC => Duration, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[Duration, VC](
       "Duration",
       construct,
@@ -176,8 +180,9 @@ object vcJsonCodec {
     *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
     *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
     */
-  def instant[VC](construct: Instant => VC)(destruct: VC => Instant,
-                                            nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
+  def instant[VC](
+    construct: Instant => VC
+  )(destruct: VC => Instant, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[Instant, VC](
       "Instant",
       construct,
@@ -219,8 +224,9 @@ object vcJsonCodec {
     *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
     *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
     */
-  def localDateTime[VC](construct: LocalDateTime => VC)(destruct: VC => LocalDateTime,
-                                                        nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
+  def localDateTime[VC](
+    construct: LocalDateTime => VC
+  )(destruct: VC => LocalDateTime, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[LocalDateTime, VC](
       "LocalDateTime",
       construct,
@@ -262,8 +268,9 @@ object vcJsonCodec {
     *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
     *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
     */
-  def offsetDateTime[VC](construct: OffsetDateTime => VC)(destruct: VC => OffsetDateTime,
-                                                          nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
+  def offsetDateTime[VC](
+    construct: OffsetDateTime => VC
+  )(destruct: VC => OffsetDateTime, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[OffsetDateTime, VC](
       "OffsetDateTime",
       construct,
@@ -348,8 +355,9 @@ object vcJsonCodec {
     *               Otherwise, you'll get a runtime NullPointerException when the resulting codec is first accessed.<br/>
     *               Workaround for this [[https://github.com/scala/bug/issues/8097 Scala compiler bug]].
     */
-  def zonedDateTime[VC](construct: ZonedDateTime => VC)(destruct: VC => ZonedDateTime,
-                                                        nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
+  def zonedDateTime[VC](
+    construct: ZonedDateTime => VC
+  )(destruct: VC => ZonedDateTime, nullVc: VC = null.asInstanceOf[VC]): JsonCodec[VC] = {
     newJsonCodec[ZonedDateTime, VC](
       "ZonedDateTime",
       construct,

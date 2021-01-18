@@ -21,15 +21,15 @@ final class vcSchemaForBicoderSpec extends AnyFreeSpec with Assertions {
     import com.github.cerst.vacade.test.anyvaltypes._
 
     "schema is preserved" in {
-      assert(SchemaFor[IntValueClass].schema(DefaultFieldMapper) == SchemaFor[Int].schema(DefaultFieldMapper))
+      assert(SchemaFor[IntValueClass].schema == SchemaFor[Int].schema)
     }
 
     "(de-) serialization matches the one of the underlying type" in {
       val plainRecord = plain.Record(1)
-      val plainBytes = serialize(plainRecord, plain.Record.schema)
+      val plainBytes = serialize(plainRecord)
 
       val anyvalRecord = anyval.Record(IntValueClass(1))
-      val anyvalBytes = serialize(anyvalRecord, anyval.Record.schema)
+      val anyvalBytes = serialize(anyvalRecord)
 
       assert(plainBytes sameElements anyvalBytes)
 
@@ -43,15 +43,15 @@ final class vcSchemaForBicoderSpec extends AnyFreeSpec with Assertions {
     import com.github.cerst.vacade.test.newtypeTypes._
 
     "schema is preserved" in {
-      assert(SchemaFor[IntValueClass].schema(DefaultFieldMapper) == SchemaFor[Int].schema(DefaultFieldMapper))
+      assert(SchemaFor[IntValueClass].schema == SchemaFor[Int].schema)
     }
 
     "(de-) serialization matches the one of the underlying type" in {
       val plainRecord = plain.Record(1)
-      val plainBytes = serialize(plainRecord, plain.Record.schema)
+      val plainBytes = serialize(plainRecord)
 
       val newtypeRecord = newtype.Record(IntValueClass(1))
-      val newtypeBytes = serialize(newtypeRecord, anyval.Record.schema)
+      val newtypeBytes = serialize(newtypeRecord)
 
       assert(plainBytes sameElements newtypeBytes)
 
@@ -93,10 +93,10 @@ private object vcSchemaForBicoderSpec {
     }
   }
 
-  def serialize[A: Encoder](a: A, schema: Schema): Array[Byte] = {
+  def serialize[A: Encoder](a: A): Array[Byte] = {
     // no .close needded
     val byteArrayOutputStream = new ByteArrayOutputStream()
-    val avroOutputStream = AvroOutputStream.binary[A].to(byteArrayOutputStream).build(schema)
+    val avroOutputStream = AvroOutputStream.binary[A].to(byteArrayOutputStream).build()
     try {
       avroOutputStream.write(a)
       avroOutputStream.flush()

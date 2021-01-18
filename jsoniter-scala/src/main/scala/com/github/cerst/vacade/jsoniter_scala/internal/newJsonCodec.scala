@@ -14,14 +14,16 @@ import scala.util.control.NonFatal
 
 object newJsonCodec {
 
-  final def apply[U, VC](uName: String,
-                         construct: U => VC,
-                         destruct: VC => U,
-                         readU: JsonReader => U,
-                         writeVal: JsonWriter => U => Unit,
-                         readKeyAsU: JsonReader => U,
-                         writeKey: JsonWriter => U => Unit,
-                         nullVc: VC): JsonCodec[VC] = {
+  final def apply[U, VC](
+    uName: String,
+    construct: U => VC,
+    destruct: VC => U,
+    readU: JsonReader => U,
+    writeVal: JsonWriter => U => Unit,
+    readKeyAsU: JsonReader => U,
+    writeKey: JsonWriter => U => Unit,
+    nullVc: VC
+  ): JsonCodec[VC] = {
 
     new JsonCodec[VC] {
       override def decodeValue(in: JsonReader, default: VC): VC = {
