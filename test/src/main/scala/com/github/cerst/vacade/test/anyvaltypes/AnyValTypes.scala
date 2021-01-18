@@ -8,12 +8,12 @@ package com.github.cerst.vacade.test.anyvaltypes
 
 import java.time.{Duration, LocalDateTime, OffsetDateTime, ZonedDateTime}
 import java.util.UUID
-
 import akka.http.scaladsl.server.PathMatcher1
 import com.github.cerst.vacade.akka.http._
 import com.github.cerst.vacade.avro4s._
 import com.github.cerst.vacade.jsoniter_scala._
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonCodec
+import com.sksamuel.avro4s.{Decoder, Encoder, SchemaFor}
 
 // ================================================================================================================
 // BIG DECIMAL
@@ -100,7 +100,11 @@ object IntValueClass {
   implicit val jsonCodecForIntValueClass: JsonCodec[IntValueClass] =
     vcJsonCodec.int(apply)(_.value, null.asInstanceOf[IntValueClass])
 
-  implicit val schemaForBicoderForIntValueClass: SchemaForBicoder[IntValueClass] = vcSchemaForBicoder(apply)(_.value)
+  implicit val (
+    encoderForIntValueClass: Encoder[IntValueClass],
+    decoderForIntValueClass: Decoder[IntValueClass],
+    schemaForIntValueClass: SchemaFor[IntValueClass]
+  ) = vcAvro4s(apply)(_.value)
 
   val hexIntPm: PathMatcher1[IntValueClass] = vcPathMatcher.hexInt(apply)
 

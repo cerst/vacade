@@ -6,39 +6,41 @@
 
 package com.github.cerst.vacade
 
-import com.sksamuel.avro4s.{Decoder, Encoder, FieldMapper, SchemaFor}
-import org.apache.avro.Schema
+import com.sksamuel.avro4s.{Decoder, Encoder, SchemaFor}
 
 /**
   * No derivations for solely `SchemaFor`, `Encoder` or `Decoder` because you can directly (co-) map them.
+  * <p>
+  * Due to a change in Avro4s 4.0, it is no longer possible to provide a single type implementing
+  * `Encoder` and `Decoder` (due to a conflicting parent trait).
   */
 package object avro4s {
 
-  /**
-    *
-    * @param overrideSchemaU By default, the schema of the underlying type `U` is used. Use this parameter to override.
-    */
-  final def vcSchemaForBicoder[U: SchemaFor: Decoder: Encoder, VC](
+  final def vcAvro4s[U: SchemaFor: Decoder: Encoder, VC](
     construct: U => VC
-  )(destruct: VC => U, overrideSchemaU: Option[FieldMapper => Schema] = None): SchemaForBicoder[VC] = {
+  )(destruct: VC => U, overrideSchemaFor: Option[SchemaFor[VC]] = None): (Encoder[VC], Decoder[VC], SchemaFor[VC]) = {
 
-    new SchemaForBicoder[VC] {
-      override def schema(fieldMapper: FieldMapper): Schema = {
-        overrideSchemaU.getOrElse(SchemaFor[U].schema _)(fieldMapper)
-      }
+    val schemaForVC = overrideSchemaFor.getOrElse(SchemaFor[U].forType[VC])
 
-      override def encode(vc: VC, schema: Schema, fieldMapper: FieldMapper): AnyRef = {
+    val encoder = new Encoder[VC] {
+      override def encode(vc: VC): AnyRef = {
         val u = destruct(vc)
-        Encoder[U].encode(u, schema, fieldMapper)
+        Encoder[U].encode(u)
       }
 
-      override def decode(value: Any, schema: Schema, fieldMapper: FieldMapper): VC = {
-        val u = Decoder[U].decode(value, schema, fieldMapper)
+      override val schemaFor: SchemaFor[VC] = schemaForVC
+    }
+
+    val decoder = new Decoder[VC] {
+      override def decode(value: Any): VC = {
+        val u = Decoder[U].decode(value)
         construct(u)
       }
 
+      override val schemaFor: SchemaFor[VC] = schemaForVC
     }
 
+    (encoder, decoder, schemaForVC)
   }
 
 }

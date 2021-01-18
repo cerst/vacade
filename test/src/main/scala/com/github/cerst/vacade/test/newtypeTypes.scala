@@ -6,16 +6,17 @@
 
 package com.github.cerst.vacade.test
 
-import java.time.{Duration, LocalDateTime, OffsetDateTime, ZonedDateTime}
-import java.util.UUID
-
 import akka.http.scaladsl.server.PathMatcher1
 import com.github.cerst.vacade.akka.http._
 import com.github.cerst.vacade.avro4s._
-import io.estatico.newtype.macros.newtype
-import io.estatico.newtype.ops._
 import com.github.cerst.vacade.jsoniter_scala._
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonCodec
+import com.sksamuel.avro4s.{Decoder, Encoder, SchemaFor}
+import io.estatico.newtype.macros.newtype
+import io.estatico.newtype.ops._
+
+import java.time.{Duration, LocalDateTime, OffsetDateTime, ZonedDateTime}
+import java.util.UUID
 
 object newtypeTypes {
 
@@ -116,7 +117,13 @@ object newtypeTypes {
   final class IntValueClass(val value: Int)
 
   object IntValueClass {
-    implicit val schemaForBicoderForIntValueClass: SchemaForBicoder[IntValueClass] = vcSchemaForBicoder(apply)(_.value)
+    implicit val (
+      encoderForIntValueClass: Encoder[IntValueClass],
+      decoderForIntValueClass: Decoder[IntValueClass],
+      schemaForIntValueClass: SchemaFor[IntValueClass]
+    ) = vcAvro4s(apply)(_.value)
+
+    implicitly[SchemaFor[IntValueClass]]
 
     implicit val jsonCodecForIntValueClass: JsonCodec[IntValueClass] = vcJsonCodec.int(apply)(_.value)
 
