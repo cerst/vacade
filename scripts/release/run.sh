@@ -39,11 +39,11 @@ done
 
 
 echo "\
-===========================
-Ensure Git branch is master
-==========================="
+=============================
+Ensure Git branch is master-1
+============================="
 git_branch=$(git symbolic-ref --short HEAD)
-if [[ ${git_branch} != "master" ]]; then
+if [[ ${git_branch} != "master-1" ]]; then
     echo "You must be on Git branch 'master' to publish"
     exit 1
 else
