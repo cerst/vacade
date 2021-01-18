@@ -10,8 +10,11 @@ different libraries.
 It supports Scala 2.12 & 2.13.
 
 ## Usage
+Due to breaking changes and compatibility problems, _vacade_ for the time being has to release paths (starting with 0.3.0):
+1. Versions following regular semver conventions keeping all dependencies as updated as possible
+2. Versions ending in `-1` which pin `akka-http` at version 10.1.x (due to ecosystem compatibility issues)
 
-Pick one or more target library:
+Pick one or more target library (depending on release path):
 ```scala
 libraryDependencies ++= Seq(
     "com.github.cerst" %% "vacade-akka-http" % vacadeVersion,
@@ -28,6 +31,7 @@ import com.githuc.cerst.vacade.jsoniter_scala._
 // dependent imports
 import akka.http.scaladsl.server.PathMatcher1
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonCodec
+import com.sksamuel.avro4s.{Decoder, Encoder, SchemaFor}
 import io.estatico.newtype.macros.newtype
 import io.estatico.newtype.ops._
 
@@ -43,7 +47,12 @@ object types {
     // leave it out for Newtype
     implicit val jsonCodecForItemId: JsonCodec[ItemId] = vcJsonCodec.int(apply)(_.asInt, null.asInstanceOf[ItemId])
 
-    implicit val schemaForBicoderForItemId: SchemaForBicoder[ItemId] = vcSchemaForBicoder(apply)(_.asInt)
+    // due to a change in Avro4s 4.0, it is unfortunately no longer possible to have a single type implementing Encoder & Decoder
+    implicit val (
+      encoderForItemId: Encoder[ItemId],
+      decoderForItemId: Decoder[ItemId],
+      schemaForItemId: SchemaFor[ItemId]
+    ) = vcAvro4s(apply)(_.value)
 
     val pm: PathMatcher1[ItemId] = vcPathMatcher.int(apply)
 

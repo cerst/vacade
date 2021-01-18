@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0-1
+Parallel release to 0.3.0 keeping _akka-http_ 10.1 and upgrading _avro4s_ to 4.0+.  
+Motivated by _akka-http_ 10.2 and _avro4s_ 4.0 both introducing breaking changes which cannot be upgraded in all
+circumstances due to ecosystem dependencies.
+
 ## 0.3.0
 * update _jsoniter-scala_ to 2.6.0
 * update _akka-http_ to 10.2.0
