@@ -18,11 +18,11 @@ addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.2")
 
 // https://github.com/xerial/sbt-sonatype
 // publish artifacts to Sonatype
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.5")
+addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.7")
 
 // https://github.com/DavidGregory084/sbt-tpolecat
 // automatically sets valuable compiler flags
-addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.16")
+addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.17")
 
 // https://github.com/rtimush/sbt-updates
 // check for new releases of plugins and dependencies
@@ -30,4 +30,4 @@ addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.16")
 // don't forget to change <project-root>/project/project/sbt-updates.sbt as well
 // useful commands
 //    dependencyUpdates - list possible updates
-addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.5.1")
+addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.5.2")

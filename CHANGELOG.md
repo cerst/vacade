@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0
+* update _akka_ to 2.6.13
+* update _akka-http_ to 10.2.4
+* update _avro4s_ to 4.0.5
+* update _jsoniter-scala_ to 2.7.0
+
 ## 0.4.0
 * update _akka-http_ to 10.2.2
 * update _avro4s_ to _4.0.4_

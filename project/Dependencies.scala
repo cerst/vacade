@@ -5,13 +5,13 @@ object Dependencies {
   val additionalResolvers: Seq[Resolver] = Seq()
 
   private object Version {
-    val Akka = "2.6.11"
-    val AkkaHttp = "10.2.2"
-    val Avro4s = "4.0.4"
-    val JsoniterScala = "2.6.2"
+    val Akka = "2.6.13"
+    val AkkaHttp = "10.2.4"
+    val Avro4s = "4.0.5"
+    val JsoniterScala = "2.7.0"
     val Newtype = "0.4.4"
     val Paradise = "2.1.1"
-    val Scalatest = "3.2.3"
+    val Scalatest = "3.2.7"
     val ScalatestPlusScalaCheck = "3.2.2.0"
   }
 
